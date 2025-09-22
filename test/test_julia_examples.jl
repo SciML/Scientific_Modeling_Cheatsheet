@@ -1,22 +1,10 @@
 #!/usr/bin/env julia
 
 """
-Test all Julia examples from the cheatsheet
+Test all examples by running the generator
 """
 
-using Test
-using LinearAlgebra
-using DifferentialEquations
-using ModelingToolkit
-using NonlinearSolve
-using ForwardDiff
-using Enzyme
-using Symbolics
-using Sundials
-using Optimization
-using OptimizationOptimJL
-using Optim
-using Integrals
+# Simply run the generator which tests all code
 
 @testset "Scientific Modeling Cheatsheet - Julia Tests" begin
 
