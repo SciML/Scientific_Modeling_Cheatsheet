@@ -47,41 +47,13 @@ Open `scientific_modeling_cheatsheet.html` in your web browser for the full inte
   - Code generation from symbolic expressions
 
 - **Component-Based Modeling**
-  - System definition with ModelingToolkit (Julia)
+  - System definition
   - Automatic simplification and index reduction
+  - Acausal component modeling
 
 - **Numerical Integration**
   - Quadrature methods
   - Adaptive integration
-
-## 🔧 Installation
-
-### Julia Packages
-```julia
-using Pkg
-Pkg.add([
-    "DifferentialEquations",
-    "ModelingToolkit",
-    "NonlinearSolve",
-    "Optimization",
-    "OptimizationOptimJL",
-    "ForwardDiff",
-    "Enzyme",
-    "Symbolics",
-    "Sundials",
-    "Integrals"
-])
-```
-
-### Python Packages
-```bash
-pip install numpy scipy sympy torch matplotlib
-```
-
-### MATLAB
-Requires MATLAB with:
-- Optimization Toolbox
-- Symbolic Math Toolbox (optional)
 
 ## ⚠️ Important Notes
 
@@ -98,61 +70,6 @@ Julia provides a more unified experience:
 - Automatic differentiation works seamlessly across packages
 - Symbolic and numeric computing can be mixed naturally
 
-### ModelingToolkit v10 Changes
-Recent updates to ModelingToolkit (v10) include:
-- All system types unified as `System` (no more `ODESystem`, `NonlinearSystem`)
-- Use `mtkcompile()` instead of `structural_simplify()`
-- Automatic index reduction for high-index DAEs
-
-## 📊 Examples
-
-### Simple ODE Example
-
-**Julia:**
-```julia
-using DifferentialEquations
-f(u, p, t) = -2*u + sin(t)
-prob = ODEProblem(f, 1.0, (0.0, 10.0))
-sol = solve(prob, Tsit5())
-```
-
-**Python:**
-```python
-from scipy.integrate import solve_ivp
-import numpy as np
-
-def f(t, y):
-    return -2*y + np.sin(t)
-
-sol = solve_ivp(f, [0, 10], [1.0])
-```
-
-**MATLAB:**
-```matlab
-f = @(t, y) -2*y + sin(t);
-[t, y] = ode45(f, [0 10], 1);
-```
-
-### DAE Example (ROBER Problem)
-
-The ROBER problem is a standard stiff DAE benchmark:
-
-**Julia:**
-```julia
-function rober(du, u, p, t)
-    y₁, y₂, y₃ = u
-    k₁, k₂, k₃ = p
-    du[1] = -k₁*y₁ + k₃*y₂*y₃
-    du[2] = k₁*y₁ - k₂*y₂^2 - k₃*y₂*y₃
-    du[3] = y₁ + y₂ + y₃ - 1  # Algebraic constraint
-end
-
-M = [1.0 0 0; 0 1.0 0; 0 0 0]  # Singular mass matrix
-f_ode = ODEFunction(rober, mass_matrix=M)
-prob = ODEProblem(f_ode, [1.0, 0, 0], (0.0, 1e-5), [0.04, 3e7, 1e4])
-sol = solve(prob, Rodas5())
-```
-
 ## 🧪 Testing
 
 Test scripts are available in the `test/` directory:
@@ -166,10 +83,6 @@ Contributions are welcome! Please feel free to submit pull requests with:
 - Corrections or improvements
 - New topics relevant to scientific computing
 
-## 📄 License
-
-MIT License
-
 ## 🔗 Resources
 
 - [Julia Documentation](https://docs.julialang.org)
@@ -179,22 +92,3 @@ MIT License
 - [SciPy Documentation](https://docs.scipy.org/doc/scipy/)
 - [PyTorch Documentation](https://pytorch.org/docs/)
 - [MATLAB Documentation](https://www.mathworks.com/help/matlab/)
-
-## 📈 Benchmarks
-
-Performance comparisons show Julia typically achieves:
-- 10-1000x speedup over Python for numerical operations
-- Performance comparable to or better than MATLAB
-- Native performance for automatic differentiation
-
-Exact benchmarks depend on specific operations and problem sizes.
-
-## 🏗️ Roadmap
-
-Future additions planned:
-- [ ] Partial differential equations (PDEs)
-- [ ] Machine learning integration
-- [ ] Parallel computing comparisons
-- [ ] GPU acceleration examples
-- [ ] More advanced optimization problems
-- [ ] Uncertainty quantification
