@@ -419,6 +419,9 @@
                 display: block;
             }
         }
+    .success { color: #27ae60; font-weight: bold; }
+.failure { color: #e74c3c; font-weight: bold; }
+
     </style>
 </head>
 <body>
@@ -512,6 +515,7 @@ using NonlinearSolve</code></td>
                         <td><code>% Built-in plotting</code></td>
                         <td><code>import matplotlib.pyplot as plt</code></td>
                         <td><code>using Plots</code></td>
+                        <td><small>P: 242.69 ms</small></td>
                     </tr>
                 </tbody>
             </table>
@@ -533,6 +537,7 @@ using NonlinearSolve</code></td>
                         <td><code>A = [1 2 3]</code></td>
                         <td><code>A = np.array([[1, 2, 3]])</code></td>
                         <td><code>A = [1 2 3]</code></td>
+                        <td><small>P: 0.00 ms</small></td>
                     </tr>
                     <tr>
                         <td>Column vector</td>
@@ -546,24 +551,28 @@ A = [1, 2, 3]</code></td>
                         <td><code>Not applicable</code></td>
                         <td><code>A = np.array([1, 2, 3])</code></td>
                         <td><code>A = [1, 2, 3]</code></td>
+                        <td><small>P: 0.00 ms</small></td>
                     </tr>
                     <tr>
                         <td>Integers from 1 to n</td>
                         <td><code>A = 1:n</code></td>
                         <td><code>A = np.arange(1, n+1)</code></td>
                         <td><code>A = 1:n</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                     <tr>
                         <td>Integers j to n, step k</td>
                         <td><code>A = j:k:n</code></td>
                         <td><code>A = np.arange(j, n+1, k)</code></td>
                         <td><code>A = j:k:n</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                     <tr>
                         <td>Linearly spaced</td>
                         <td><code>A = linspace(1, 5, k)</code></td>
                         <td><code>A = np.linspace(1, 5, k)</code></td>
                         <td><code>A = range(1, 5, length=k)</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                 </tbody>
             </table>
@@ -585,18 +594,21 @@ A = [1, 2, 3]</code></td>
                         <td><code>A = [1 2; 3 4]</code></td>
                         <td><code>A = np.array([[1, 2], [3, 4]])</code></td>
                         <td><code>A = [1 2; 3 4]</code></td>
+                        <td><small>P: 0.01 ms</small></td>
                     </tr>
                     <tr>
                         <td>Zeros</td>
                         <td><code>A = zeros(2, 2)</code></td>
                         <td><code>A = np.zeros((2, 2))</code></td>
                         <td><code>A = zeros(2, 2)</code></td>
+                        <td><small>P: 0.00 ms</small></td>
                     </tr>
                     <tr>
                         <td>Ones</td>
                         <td><code>A = ones(2, 2)</code></td>
                         <td><code>A = np.ones((2, 2))</code></td>
                         <td><code>A = ones(2, 2)</code></td>
+                        <td><small>P: 0.01 ms</small></td>
                     </tr>
                     <tr>
                         <td>Identity</td>
@@ -610,18 +622,21 @@ A = Matrix(I, 2, 2)</code></td>
                         <td><code>A = diag([1 2 3])</code></td>
                         <td><code>A = np.diag([1, 2, 3])</code></td>
                         <td><code>A = Diagonal([1, 2, 3])</code></td>
+                        <td><small>P: 0.01 ms</small></td>
                     </tr>
                     <tr>
                         <td>Random uniform</td>
                         <td><code>A = rand(2, 2)</code></td>
                         <td><code>A = np.random.rand(2, 2)</code></td>
                         <td><code>A = rand(2, 2)</code></td>
+                        <td><small>P: 0.53 ms</small></td>
                     </tr>
                     <tr>
                         <td>Random normal</td>
                         <td><code>A = randn(2, 2)</code></td>
                         <td><code>A = np.random.randn(2, 2)</code></td>
                         <td><code>A = randn(2, 2)</code></td>
+                        <td><small>P: 0.06 ms</small></td>
                     </tr>
                     <tr>
                         <td>Sparse</td>
@@ -1153,6 +1168,7 @@ freq = fftfreq(length(x), fs)</code></td>
                         <td><code>x = ifft(y)</code></td>
                         <td><code>x = np.fft.ifft(y)</code></td>
                         <td><code>x = ifft(y)</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                     <tr>
                         <td>Power spectrum</td>
@@ -1177,6 +1193,7 @@ y = filt(H, x)</code></td>
                         <td><code>y = conv(x, h)</code></td>
                         <td><code>y = np.convolve(x, h)</code></td>
                         <td><code>y = conv(x, h)</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                 </tbody>
             </table>
@@ -1219,6 +1236,7 @@ q = quantile(x, [0.25, 0.75])</code></td>
                         <td><code>R = corrcoef(x, y)</code></td>
                         <td><code>R = np.corrcoef(x, y)</code></td>
                         <td><code>R = cor(x, y)</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                 </tbody>
             </table>
@@ -1359,24 +1377,28 @@ x, y, z = sp.symbols('x y z')</code></td>
                         <td><code>expr = x^2 + 2*x*y + y^2</code></td>
                         <td><code>expr = x**2 + 2*x*y + y**2</code></td>
                         <td><code>expr = x^2 + 2*x*y + y^2</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                     <tr>
                         <td>Substitute values</td>
                         <td><code>subs(expr, x, 2)</code></td>
                         <td><code>expr.subs(x, 2)</code></td>
                         <td><code>substitute(expr, x => 2)</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                     <tr>
                         <td>Simplify</td>
                         <td><code>simplify(expr)</code></td>
                         <td><code>sp.simplify(expr)</code></td>
                         <td><code>simplify(expr)</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                     <tr>
                         <td>Expand</td>
                         <td><code>expand(expr)</code></td>
                         <td><code>sp.expand(expr)</code></td>
                         <td><code>expand(expr)</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                     <tr>
                         <td>Factor</td>
@@ -1451,12 +1473,14 @@ expand_derivatives(D^2(expr))</code></td>
                         <td><code>gradient(f, [x, y, z])</code></td>
                         <td><code>[sp.diff(f, var) for var in [x, y, z]]</code></td>
                         <td><code>Symbolics.gradient(f, [x, y, z])</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                     <tr>
                         <td>Jacobian</td>
                         <td><code>jacobian([f1; f2], [x, y])</code></td>
                         <td><code>sp.Matrix([f1, f2]).jacobian([x, y])</code></td>
                         <td><code>Symbolics.jacobian([f1, f2], [x, y])</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                     <tr>
                         <td>Integral (indefinite)</td>
@@ -1534,6 +1558,7 @@ symbolic_solve([x + y ~ 5, x - y ~ 1], [x, y])</code></td>
                         <td><code>% Not available natively</code></td>
                         <td><code>import torch</code></td>
                         <td><code>using ForwardDiff</code></td>
+                        <td><small>P: 439.75 ms</small></td>
                     </tr>
                     <tr>
                         <td>Gradient (scalar → scalar)</td>
@@ -1637,6 +1662,7 @@ y = x^2 + sin(x)
                         <td><code>% Not available natively</code></td>
                         <td><code>import torch</code></td>
                         <td><code>using Enzyme</code></td>
+                        <td><small>P: 439.75 ms</small></td>
                     </tr>
                     <tr>
                         <td>Gradient</td>
@@ -1880,6 +1906,7 @@ model = complete(model)</code></td>
                         <td><code>% Simulink cannot simplify</code></td>
                         <td><code># Manual</code></td>
                         <td><code>model_simplified = mtkcompile(model)</code></td>
+                        <td><small>N/A</small></td>
                     </tr>
                 </tbody>
             </table>
@@ -1919,5 +1946,135 @@ model = complete(model)</code></td>
             });
         });
     </script>
+    <h2 id="timing-results">Performance Comparison</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Example</th>
+                <th>Julia Status</th>
+                <th>Python Status</th>
+                <th>Julia Time (ms)</th>
+                <th>Python Time (ms)</th>
+                <th>Speedup</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Identity</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.01</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Create matrix</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.01</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Diagonal</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.01</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>1-D array</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.00</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Random normal</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.06</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Column vector</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.00</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Setup</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>439.75</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Ones</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.01</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Zeros</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.00</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Random uniform</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.53</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Plotting</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>242.69</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Row vector</td>
+                <td class="failure">✗</td>
+                <td class="success">✓</td>
+                <td>N/A</td>
+                <td>0.00</td>
+                <td>N/A</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="note">
+        <p><strong>Timing Notes:</strong></p>
+        <ul>
+            <li>Timings are for single execution (not benchmarked averages)</li>
+            <li>Many examples are setup/import statements that don't have meaningful timing</li>
+            <li>Speedup calculated as Python time / Julia time</li>
+            <li>N/A indicates test failed or no meaningful timing available</li>
+        </ul>
+    </div>
+    <div style="text-align: center; color: #7f8c8d; font-size: 12px; margin-top: 40px; padding: 20px; background-color: white; border-radius: 5px;">
+        <hr>
+        <p>Generated: 2025-09-23T04:01:24.540</p>
+        <p>Total examples: 92</p>
+        <p>Julia tests passed: 0/92</p>
+        <p>Python tests passed: 12/92</p>
+        <p>🧪 Code examples tested with timing data</p>
+    </div>
+
 </body>
 </html>

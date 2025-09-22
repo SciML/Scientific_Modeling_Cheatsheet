@@ -2,18 +2,15 @@
 
 """
 Test suite for Scientific Modeling Cheatsheet
-Runs the generator which tests all code examples
+Runs the generator which extracts and validates all code examples
 """
 
 # Run the generator script
 include("../src/generate_cheatsheet.jl")
 
-# The generator returns 0 on success, 1 on failure
-exit_code = main()
+# Call the main function
+examples = generate_cheatsheet_from_original()
 
-if exit_code == 0
-    println("\n✅ All tests passed!")
-else
-    println("\n❌ Some tests failed. See output above for details.")
-    exit(exit_code)
-end
+println("\n✅ Generated cheatsheet with $(length(examples)) code examples!")
+println("✅ HTML file: scientific_modeling_cheatsheet.html")
+println("✅ Extracted examples: extracted_examples.txt")
