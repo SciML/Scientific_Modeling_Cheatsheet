@@ -2,17 +2,14 @@
 
 A comprehensive quick reference guide comparing MATLAB, Python, and Julia for scientific computing and modeling tasks.
 
+### [View the Cheatsheet](https://sciml.github.io/Scientific_Modeling_Cheatsheet/scientific_modeling_cheatsheet)
+
 ## 📚 Overview
 
 This cheatsheet provides side-by-side comparisons of common scientific computing operations across three major platforms:
 - **MATLAB** - The traditional choice for engineering and scientific computing
 - **Python** - Using NumPy, SciPy, PyTorch, and SymPy for scientific computing
 - **Julia** - Modern high-performance scientific computing with unified ecosystem
-
-## 🚀 Quick Start
-
-### View the Cheatsheet
-Open `scientific_modeling_cheatsheet.html` in your web browser for the full interactive reference guide.
 
 ### Topics Covered
 
