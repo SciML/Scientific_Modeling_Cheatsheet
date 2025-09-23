@@ -496,7 +496,8 @@
                         <td><code>import numpy as np
 from numpy import linalg as la</code></td>
                         <td><code>using LinearAlgebra
-using Statistics</code></td>
+using Statistics
+using SparseArrays</code></td>
                     </tr>
                     <tr>
                         <td>Scientific computing</td>
@@ -538,8 +539,9 @@ using NonlinearSolve</code></td>
                         <td>Column vector</td>
                         <td><code>A = [1; 2; 3]</code></td>
                         <td><code>A = np.array([[1], [2], [3]])</code></td>
-                        <td><code>A = [1; 2; 3]
-A = [1, 2, 3]</code></td>
+                        <td><code>A = [1 2 3]'  # Transpose of row vector
+A = [1; 2; 3]  # Using semicolons
+A = [1, 2, 3]  # 1-D array (column)</code></td>
                     </tr>
                     <tr>
                         <td>1-D array</td>
@@ -629,7 +631,703 @@ A = Matrix(I, 2, 2)</code></td>
                         <td><code>from scipy import sparse
 A = sparse.csr_matrix(B)</code></td>
                         <td><code>using SparseArrays
-A = sparse(B)</code></td>
+A = sparse(B)
+# Create empty sparse matrix
+A = spzeros(2, 2)
+A[1, 2] = 4
+A[2, 2] = 1</code></td>
+                    </tr>
+                    <tr>
+                        <td>Tridiagonal</td>
+                        <td><code>A = diag(x, -1) + diag(y, 0) + diag(z, 1)</code></td>
+                        <td><code>from scipy.sparse import diags
+A = diags([x, y, z], [-1, 0, 1])</code></td>
+                        <td><code># Example vectors
+x = [1, 2, 3]
+y = [4, 5, 6, 7]
+z = [8, 9, 10]
+Tridiagonal(x, y, z)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Manipulating Vectors and Matrices -->
+            <h2 id="manipulating">Manipulating Vectors and Matrices</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>MATLAB</th>
+                        <th>Python</th>
+                        <th>Julia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Transpose</td>
+                        <td><code>A.'</code></td>
+                        <td><code>A.T</code></td>
+                        <td><code>transpose(A)
+A'</code></td>
+                    </tr>
+                    <tr>
+                        <td>Complex conjugate transpose</td>
+                        <td><code>A'</code></td>
+                        <td><code>A.conj().T</code></td>
+                        <td><code>A'</code></td>
+                    </tr>
+                    <tr>
+                        <td>Concatenate horizontally</td>
+                        <td><code>A = [B C]</code></td>
+                        <td><code>A = np.hstack([B, C])
+A = np.concatenate([B, C], axis=1)</code></td>
+                        <td><code>A = [[1 2] [1 2]]  # For literals
+A = [B C]  # For variables
+A = hcat(B, C)  # Function form</code></td>
+                    </tr>
+                    <tr>
+                        <td>Concatenate vertically</td>
+                        <td><code>A = [B; C]</code></td>
+                        <td><code>A = np.vstack([B, C])
+A = np.concatenate([B, C], axis=0)</code></td>
+                        <td><code>A = [[1 2]; [1 2]]  # For literals
+A = [B; C]  # For variables
+A = vcat(B, C)  # Function form</code></td>
+                    </tr>
+                    <tr>
+                        <td>Reshape (to 5x2)</td>
+                        <td><code>A = reshape(A, 5, 2)</code></td>
+                        <td><code>A = A.reshape(5, 2)</code></td>
+                        <td><code>A = reshape(A, 5, 2)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Convert matrix to vector</td>
+                        <td><code>A(:)</code></td>
+                        <td><code>A.flatten()</code></td>
+                        <td><code>A[:]
+vec(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Flip left/right</td>
+                        <td><code>fliplr(A)</code></td>
+                        <td><code>np.fliplr(A)</code></td>
+                        <td><code>reverse(A, dims=2)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Flip up/down</td>
+                        <td><code>flipud(A)</code></td>
+                        <td><code>np.flipud(A)</code></td>
+                        <td><code>reverse(A, dims=1)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Repeat matrix (3x4 block)</td>
+                        <td><code>repmat(A, 3, 4)</code></td>
+                        <td><code>np.tile(A, (3, 4))</code></td>
+                        <td><code>repeat(A, 3, 4)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Preallocate similar array</td>
+                        <td><code>B = zeros(size(A))</code></td>
+                        <td><code>B = np.empty_like(A)</code></td>
+                        <td><code>x = rand(3, 3)
+y = similar(x)
+y = similar(x, 2, 2)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Broadcasting functions</td>
+                        <td><code>arrayfun(@(x) x^2, A)</code></td>
+                        <td><code>A**2  # NumPy broadcasts automatically</code></td>
+                        <td><code>f(x) = x^2
+g(x, y) = x + 2 + y^2
+x = 1:10
+y = 2:11
+f.(x)  # Apply f to each element
+g.(x, y)  # Apply g element-wise</code></td>
+                    </tr>
+                    <tr>
+                        <td>Sort rows</td>
+                        <td><code>sort(A)</code></td>
+                        <td><code>np.sort(A)</code></td>
+                        <td><code>sort(A, dims=1)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Sort columns</td>
+                        <td><code>sort(A, 2)</code></td>
+                        <td><code>np.sort(A, axis=1)</code></td>
+                        <td><code>sort(A, dims=2)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Unique values</td>
+                        <td><code>unique(A)</code></td>
+                        <td><code>np.unique(A)</code></td>
+                        <td><code>unique(A)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Accessing Elements -->
+            <h2 id="accessing">Accessing Vector/Matrix Elements</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>MATLAB</th>
+                        <th>Python</th>
+                        <th>Julia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Access element (row i, col j)</td>
+                        <td><code>A(i, j)</code></td>
+                        <td><code>A[i-1, j-1]</code></td>
+                        <td><code>A[i, j]</code></td>
+                    </tr>
+                    <tr>
+                        <td>Access row i</td>
+                        <td><code>A(i, :)</code></td>
+                        <td><code>A[i-1, :]</code></td>
+                        <td><code>A[i, :]</code></td>
+                    </tr>
+                    <tr>
+                        <td>Access column j</td>
+                        <td><code>A(:, j)</code></td>
+                        <td><code>A[:, j-1]</code></td>
+                        <td><code>A[:, j]</code></td>
+                    </tr>
+                    <tr>
+                        <td>First k rows</td>
+                        <td><code>A(1:k, :)</code></td>
+                        <td><code>A[:k, :]</code></td>
+                        <td><code>A[1:k, :]</code></td>
+                    </tr>
+                    <tr>
+                        <td>First k columns</td>
+                        <td><code>A(:, 1:k)</code></td>
+                        <td><code>A[:, :k]</code></td>
+                        <td><code>A[:, 1:k]</code></td>
+                    </tr>
+                    <tr>
+                        <td>Last k rows</td>
+                        <td><code>A(end-k+1:end, :)</code></td>
+                        <td><code>A[-k:, :]</code></td>
+                        <td><code>A[end-k+1:end, :]</code></td>
+                    </tr>
+                    <tr>
+                        <td>Select rows [1, 3, 5]</td>
+                        <td><code>A([1 3 5], :)</code></td>
+                        <td><code>A[[0, 2, 4], :]</code></td>
+                        <td><code>A[[1, 3, 5], :]</code></td>
+                    </tr>
+                    <tr>
+                        <td>Remove row 2</td>
+                        <td><code>A(2, :) = []</code></td>
+                        <td><code>A = np.delete(A, 1, axis=0)</code></td>
+                        <td><code>A = A[setdiff(1:end, 2), :]</code></td>
+                    </tr>
+                    <tr>
+                        <td>Diagonal elements</td>
+                        <td><code>diag(A)</code></td>
+                        <td><code>np.diag(A)</code></td>
+                        <td><code>diag(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Get dimensions</td>
+                        <td><code>size(A)</code></td>
+                        <td><code>A.shape</code></td>
+                        <td><code>size(A)
+nrow, ncol = size(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Number of dimensions</td>
+                        <td><code>ndims(A)</code></td>
+                        <td><code>A.ndim</code></td>
+                        <td><code>ndims(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Number of elements</td>
+                        <td><code>numel(A)</code></td>
+                        <td><code>A.size</code></td>
+                        <td><code>length(A)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Mathematical Operations -->
+            <h2 id="math-ops">Mathematical Operations</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>MATLAB</th>
+                        <th>Python</th>
+                        <th>Julia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dot product</td>
+                        <td><code>dot(A, B)</code></td>
+                        <td><code>np.dot(A, B)
+A @ B</code></td>
+                        <td><code>dot(A, B)
+A ⋅ B</code></td>
+                    </tr>
+                    <tr>
+                        <td>Matrix multiplication</td>
+                        <td><code>A * B</code></td>
+                        <td><code>A @ B
+np.matmul(A, B)</code></td>
+                        <td><code>A * B</code></td>
+                    </tr>
+                    <tr>
+                        <td>Element-wise multiplication</td>
+                        <td><code>A .* B</code></td>
+                        <td><code>A * B</code></td>
+                        <td><code>A .* B</code></td>
+                    </tr>
+                    <tr>
+                        <td>Element-wise division</td>
+                        <td><code>A ./ B</code></td>
+                        <td><code>A / B</code></td>
+                        <td><code>A ./ B</code></td>
+                    </tr>
+                    <tr>
+                        <td>Element-wise power</td>
+                        <td><code>A .^ 2</code></td>
+                        <td><code>A ** 2</code></td>
+                        <td><code>A .^ 2</code></td>
+                    </tr>
+                    <tr>
+                        <td>Matrix power</td>
+                        <td><code>A^2</code></td>
+                        <td><code>np.linalg.matrix_power(A, 2)</code></td>
+                        <td><code>A^2</code></td>
+                    </tr>
+                    <tr>
+                        <td>Inverse</td>
+                        <td><code>inv(A)</code></td>
+                        <td><code>np.linalg.inv(A)</code></td>
+                        <td><code>inv(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Determinant</td>
+                        <td><code>det(A)</code></td>
+                        <td><code>np.linalg.det(A)</code></td>
+                        <td><code>det(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Eigenvalues & vectors</td>
+                        <td><code>[V, D] = eig(A)</code></td>
+                        <td><code>D, V = np.linalg.eig(A)</code></td>
+                        <td><code>D, V = eigen(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Singular value decomposition</td>
+                        <td><code>[U, S, V] = svd(A)</code></td>
+                        <td><code>U, S, V = np.linalg.svd(A)</code></td>
+                        <td><code>U, S, V = svd(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Cholesky decomposition</td>
+                        <td><code>chol(A)</code></td>
+                        <td><code>np.linalg.cholesky(A)</code></td>
+                        <td><code>cholesky(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>LU decomposition</td>
+                        <td><code>[L, U, P] = lu(A)</code></td>
+                        <td><code>P, L, U = scipy.linalg.lu(A)</code></td>
+                        <td><code>L, U, p = lu(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>QR decomposition</td>
+                        <td><code>[Q, R] = qr(A)</code></td>
+                        <td><code>Q, R = np.linalg.qr(A)</code></td>
+                        <td><code>Q, R = qr(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Rank</td>
+                        <td><code>rank(A)</code></td>
+                        <td><code>np.linalg.matrix_rank(A)</code></td>
+                        <td><code>rank(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Trace</td>
+                        <td><code>trace(A)</code></td>
+                        <td><code>np.trace(A)</code></td>
+                        <td><code>tr(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Norm</td>
+                        <td><code>norm(A)</code></td>
+                        <td><code>np.linalg.norm(A)</code></td>
+                        <td><code>norm(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Condition number</td>
+                        <td><code>cond(A)</code></td>
+                        <td><code>np.linalg.cond(A)</code></td>
+                        <td><code>cond(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Solve Ax = b</td>
+                        <td><code>A \ b</code></td>
+                        <td><code>np.linalg.solve(A, b)</code></td>
+                        <td><code>A \ b</code></td>
+                    </tr>
+                    <tr>
+                        <td>Least squares</td>
+                        <td><code>A \ b</code></td>
+                        <td><code>np.linalg.lstsq(A, b)[0]</code></td>
+                        <td><code>A \ b</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Sum / Max / Min -->
+            <h2 id="aggregation">Sum / Max / Min</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>MATLAB</th>
+                        <th>Python</th>
+                        <th>Julia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sum of all elements</td>
+                        <td><code>sum(A(:))</code></td>
+                        <td><code>np.sum(A)</code></td>
+                        <td><code>sum(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Sum along columns</td>
+                        <td><code>sum(A)</code></td>
+                        <td><code>np.sum(A, axis=0)</code></td>
+                        <td><code>sum(A, dims=1)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Sum along rows</td>
+                        <td><code>sum(A, 2)</code></td>
+                        <td><code>np.sum(A, axis=1)</code></td>
+                        <td><code>sum(A, dims=2)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Cumulative sum</td>
+                        <td><code>cumsum(A)</code></td>
+                        <td><code>np.cumsum(A)</code></td>
+                        <td><code>cumsum(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Max of all elements</td>
+                        <td><code>max(A(:))</code></td>
+                        <td><code>np.max(A)</code></td>
+                        <td><code>maximum(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Max along columns</td>
+                        <td><code>max(A)</code></td>
+                        <td><code>np.max(A, axis=0)</code></td>
+                        <td><code>maximum(A, dims=1)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Max along rows</td>
+                        <td><code>max(A, [], 2)</code></td>
+                        <td><code>np.max(A, axis=1)</code></td>
+                        <td><code>maximum(A, dims=2)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Max and index</td>
+                        <td><code>[val, idx] = max(A)</code></td>
+                        <td><code>idx = np.argmax(A)
+val = A.flat[idx]</code></td>
+                        <td><code>val, idx = findmax(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Min of all elements</td>
+                        <td><code>min(A(:))</code></td>
+                        <td><code>np.min(A)</code></td>
+                        <td><code>minimum(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Min along columns</td>
+                        <td><code>min(A)</code></td>
+                        <td><code>np.min(A, axis=0)</code></td>
+                        <td><code>minimum(A, dims=1)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Min along rows</td>
+                        <td><code>min(A, [], 2)</code></td>
+                        <td><code>np.min(A, axis=1)</code></td>
+                        <td><code>minimum(A, dims=2)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Min and index</td>
+                        <td><code>[val, idx] = min(A)</code></td>
+                        <td><code>idx = np.argmin(A)
+val = A.flat[idx]</code></td>
+                        <td><code>val, idx = findmin(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Mean</td>
+                        <td><code>mean(A)</code></td>
+                        <td><code>np.mean(A)</code></td>
+                        <td><code>mean(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Median</td>
+                        <td><code>median(A)</code></td>
+                        <td><code>np.median(A)</code></td>
+                        <td><code>median(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Standard deviation</td>
+                        <td><code>std(A)</code></td>
+                        <td><code>np.std(A)</code></td>
+                        <td><code>std(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Variance</td>
+                        <td><code>var(A)</code></td>
+                        <td><code>np.var(A)</code></td>
+                        <td><code>var(A)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Programming -->
+            <h2 id="programming">Programming</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>MATLAB</th>
+                        <th>Python</th>
+                        <th>Julia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Comment</td>
+                        <td><code>% This is a comment</code></td>
+                        <td><code># This is a comment</code></td>
+                        <td><code># This is a comment</code></td>
+                    </tr>
+                    <tr>
+                        <td>Multiline comment</td>
+                        <td><code>%{
+This is a
+multiline comment
+%}</code></td>
+                        <td><code>"""
+This is a
+multiline comment
+"""</code></td>
+                        <td><code>#=
+This is a
+multiline comment
+=#</code></td>
+                    </tr>
+                    <tr>
+                        <td>For loop</td>
+                        <td><code>for i = 1:10
+    disp(i)
+end</code></td>
+                        <td><code>for i in range(1, 11):
+    print(i)</code></td>
+                        <td><code>for i in 1:10
+    println(i)
+end</code></td>
+                    </tr>
+                    <tr>
+                        <td>While loop</td>
+                        <td><code>while x < 10
+    x = x + 1
+end</code></td>
+                        <td><code>while x < 10:
+    x = x + 1</code></td>
+                        <td><code>while x < 10
+    x = x + 1
+end</code></td>
+                    </tr>
+                    <tr>
+                        <td>If statement</td>
+                        <td><code>if x > 0
+    disp('positive')
+elseif x < 0
+    disp('negative')
+else
+    disp('zero')
+end</code></td>
+                        <td><code>if x > 0:
+    print('positive')
+elif x < 0:
+    print('negative')
+else:
+    print('zero')</code></td>
+                        <td><code>if x > 0
+    println("positive")
+elseif x < 0
+    println("negative")
+else
+    println("zero")
+end</code></td>
+                    </tr>
+                    <tr>
+                        <td>Function definition</td>
+                        <td><code>function y = f(x)
+    y = x^2;
+end</code></td>
+                        <td><code>def f(x):
+    return x**2</code></td>
+                        <td><code>function f(x)
+    return x^2
+end
+
+f(x) = x^2</code></td>
+                    </tr>
+                    <tr>
+                        <td>Anonymous function</td>
+                        <td><code>f = @(x) x^2</code></td>
+                        <td><code>f = lambda x: x**2</code></td>
+                        <td><code>f = x -> x^2</code></td>
+                    </tr>
+                    <tr>
+                        <td>Try-catch</td>
+                        <td><code>try
+    % code
+catch ME
+    disp(ME.message)
+end</code></td>
+                        <td><code>try:
+    # code
+except Exception as e:
+    print(e)</code></td>
+                        <td><code>try
+    # code
+catch e
+    println(e)
+end</code></td>
+                    </tr>
+                    <tr>
+                        <td>Print to console</td>
+                        <td><code>disp('text')
+fprintf('text\n')</code></td>
+                        <td><code>print('text')</code></td>
+                        <td><code>println("text")
+print("text")</code></td>
+                    </tr>
+                    <tr>
+                        <td>String formatting</td>
+                        <td><code>sprintf('x = %d', x)</code></td>
+                        <td><code>f'x = {x}'
+'x = {}'.format(x)</code></td>
+                        <td><code>"x = $x"
+@sprintf("x = %d", x)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Ternary operator</td>
+                        <td><code>y = (x > 0) * 1 + (x <= 0) * (-1)</code></td>
+                        <td><code>y = 1 if x > 0 else -1</code></td>
+                        <td><code>y = x > 0 ? 1 : -1</code></td>
+                    </tr>
+                    <tr>
+                        <td>List comprehension</td>
+                        <td><code>y = arrayfun(@(x) x^2, 1:10)</code></td>
+                        <td><code>y = [x**2 for x in range(1, 11)]</code></td>
+                        <td><code>y = [x^2 for x in 1:10]</code></td>
+                    </tr>
+                    <tr>
+                        <td>Map function</td>
+                        <td><code>arrayfun(@(x) x^2, A)</code></td>
+                        <td><code>list(map(lambda x: x**2, A))</code></td>
+                        <td><code>map(x -> x^2, A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Filter function</td>
+                        <td><code>A(A > 0)</code></td>
+                        <td><code>list(filter(lambda x: x > 0, A))</code></td>
+                        <td><code>filter(x -> x > 0, A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Type checking</td>
+                        <td><code>isa(x, 'double')</code></td>
+                        <td><code>isinstance(x, float)</code></td>
+                        <td><code>isa(x, Float64)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Tuples</td>
+                        <td><code>% Cell arrays serve similar purpose
+A = {1, 'text', [1 2 3]}</code></td>
+                        <td><code>t = (1, 'text', [1, 2, 3])
+# Named tuple
+from collections import namedtuple
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(1, 2)</code></td>
+                        <td><code># Tuple
+t = (1, "text", [1, 2, 3])
+# Named tuple
+t = (x=1, y=2, z=3)
+t.x  # Access element
+# Unpacking
+a, b, c = t</code></td>
+                    </tr>
+                    <tr>
+                        <td>Closures</td>
+                        <td><code>function f = makemultiplier(x)
+    function g = mult(y)
+        g = x * y;
+    end
+    f = @mult;
+end</code></td>
+                        <td><code>def make_multiplier(x):
+    def mult(y):
+        return x * y
+    return mult</code></td>
+                        <td><code>function make_multiplier(x)
+    return y -> x * y
+end
+# Or with mutable state
+function counter()
+    count = 0
+    return () -> (count += 1)
+end</code></td>
+                    </tr>
+                    <tr>
+                        <td>In-place modification</td>
+                        <td><code>A(:) = B(:)</code></td>
+                        <td><code>A[:] = B[:]</code></td>
+                        <td><code># Convention: ! indicates mutation
+function f!(out, x)
+    out .= x.^2
+end
+x = rand(10)
+y = similar(x)
+f!(y, x)
+
+# ODE example
+function mysys!(du, u, p, t)
+    du[1] = u[2]
+    du[2] = -u[1]
+end
+
+# Modify array in-place
+A .= B  # Element-wise assignment
+A .+= 1  # Add 1 to all elements</code></td>
+                    </tr>
+                    <tr>
+                        <td>Timing code</td>
+                        <td><code>tic; % code; toc</code></td>
+                        <td><code>import time
+start = time.time()
+# code
+print(time.time() - start)</code></td>
+                        <td><code>@time begin
+    # code
+end</code></td>
                     </tr>
                 </tbody>
             </table>
