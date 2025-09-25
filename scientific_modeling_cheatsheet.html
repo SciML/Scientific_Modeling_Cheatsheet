@@ -665,20 +665,22 @@ Tridiagonal(x, y, z)</code></td>
                 <tbody>
                     <tr>
                         <td>Transpose</td>
-                        <td><code>A.'</code></td>
-                        <td><code>A.T</code></td>
                         <td><code>transpose(A)
-A'</code></td>
+A.'</code></td>
+                        <td><code>A.T</code></td>
+                        <td><code>transpose(A)</code></td>
                     </tr>
                     <tr>
                         <td>Complex conjugate transpose</td>
                         <td><code>A'</code></td>
                         <td><code>A.conj().T</code></td>
-                        <td><code>A'</code></td>
+                        <td><code>A'
+adjoint(A)</code></td>
                     </tr>
                     <tr>
                         <td>Concatenate horizontally</td>
-                        <td><code>A = [B C]</code></td>
+                        <td><code>A = [B C]
+A = horzcat(B,C)</code></td>
                         <td><code>A = np.hstack([B, C])
 A = np.concatenate([B, C], axis=1)</code></td>
                         <td><code>A = [[1 2] [1 2]]  # For literals
@@ -687,7 +689,8 @@ A = hcat(B, C)  # Function form</code></td>
                     </tr>
                     <tr>
                         <td>Concatenate vertically</td>
-                        <td><code>A = [B; C]</code></td>
+                        <td><code>A = [B; C]
+A = vertcat(B,C)</code></td>
                         <td><code>A = np.vstack([B, C])
 A = np.concatenate([B, C], axis=0)</code></td>
                         <td><code>A = [[1 2]; [1 2]]  # For literals
@@ -745,13 +748,13 @@ f.(x)  # Apply f to each element
 g.(x, y)  # Apply g element-wise</code></td>
                     </tr>
                     <tr>
-                        <td>Sort rows</td>
+                        <td>Sort each row</td>
                         <td><code>sort(A)</code></td>
                         <td><code>np.sort(A)</code></td>
                         <td><code>sort(A, dims=1)</code></td>
                     </tr>
                     <tr>
-                        <td>Sort columns</td>
+                        <td>Sort each column</td>
                         <td><code>sort(A, 2)</code></td>
                         <td><code>np.sort(A, axis=1)</code></td>
                         <td><code>sort(A, dims=2)</code></td>
