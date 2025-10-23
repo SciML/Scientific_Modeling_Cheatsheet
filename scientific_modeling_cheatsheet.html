@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scientific Modeling Cheatsheet – MATLAB – Python – Julia Quick Reference</title>
+    <title>Scientific Modeling Cheatsheet – MATLAB – Scilab – Python – Julia Quick Reference</title>
     <style>
         * {
             margin: 0;
@@ -202,10 +202,14 @@
         }
 
         td:nth-child(3) {
-            background: #f5fef5;  /* Python - Light Green */
+            background: #fffef5;  /* Scilab - Light Yellow */
         }
 
         td:nth-child(4) {
+            background: #f5fef5;  /* Python - Light Green */
+        }
+
+        td:nth-child(5) {
             background: #f5f8fe;  /* Julia - Light Blue */
         }
 
@@ -219,10 +223,14 @@
         }
 
         tr:nth-child(even) td:nth-child(3) {
-            background: #f0fef0;  /* Python - Slightly darker green */
+            background: #fffef0;  /* Scilab - Slightly darker yellow */
         }
 
         tr:nth-child(even) td:nth-child(4) {
+            background: #f0fef0;  /* Python - Slightly darker green */
+        }
+
+        tr:nth-child(even) td:nth-child(5) {
             background: #f0f5fe;  /* Julia - Slightly darker blue */
         }
 
@@ -235,10 +243,14 @@
         }
 
         tr:hover td:nth-child(3) {
-            background: #e8fee8 !important;
+            background: #fffee8 !important;
         }
 
         tr:hover td:nth-child(4) {
+            background: #e8fee8 !important;
+        }
+
+        tr:hover td:nth-child(5) {
             background: #e8f0fe !important;
         }
 
@@ -419,6 +431,27 @@
                 display: block;
             }
         }
+
+        /* Column hiding styles */
+        .hidematlab td:nth-child(2), .hidematlab th:nth-child(2) {
+            display: none;
+        }
+
+        .hidescilab td:nth-child(3), .hidescilab th:nth-child(3) {
+            display: none;
+        }
+
+        .hidepython td:nth-child(4), .hidepython th:nth-child(4) {
+            display: none;
+        }
+
+        .hidejulia td:nth-child(5), .hidejulia th:nth-child(5) {
+            display: none;
+        }
+
+        .subtitle span {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -471,7 +504,7 @@
         <!-- Main Content -->
         <main class="main-content">
             <h1>Scientific Modeling Cheatsheet</h1>
-            <p class="subtitle">MATLAB – Python – Julia Quick Reference</p>
+            <p class="subtitle"><span id="matlab" title="Click to hide/show column" style="cursor:pointer">MATLAB</span> – <span id="scilab" title="Click to hide/show column" style="cursor:pointer">Scilab</span> – <span id="python" title="Click to hide/show column" style="cursor:pointer">Python</span> – <span id="julia" title="Click to hide/show column" style="cursor:pointer">Julia</span> Quick Reference</p>
 
             <!-- Note about MATLAB code -->
             <div class="note" style="margin-bottom: 30px;">
@@ -485,6 +518,7 @@
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -493,6 +527,7 @@
                     <tr>
                         <td>Basic numerical</td>
                         <td><code>% Built-in</code></td>
+                        <td><code>// Built-in</code></td>
                         <td><code>import numpy as np
 from numpy import linalg as la</code></td>
                         <td><code>using LinearAlgebra
@@ -502,6 +537,7 @@ using SparseArrays</code></td>
                     <tr>
                         <td>Scientific computing</td>
                         <td><code>% Built-in ODE solvers</code></td>
+                        <td><code>// Built-in ODE solvers</code></td>
                         <td><code>from scipy import integrate
 from scipy import optimize</code></td>
                         <td><code>using DifferentialEquations
@@ -511,6 +547,7 @@ using NonlinearSolve</code></td>
                     <tr>
                         <td>Plotting</td>
                         <td><code>% Built-in plotting</code></td>
+                        <td><code>// Built-in plotting</code></td>
                         <td><code>import matplotlib.pyplot as plt</code></td>
                         <td><code>using Plots</code></td>
                     </tr>
@@ -524,6 +561,7 @@ using NonlinearSolve</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -532,11 +570,13 @@ using NonlinearSolve</code></td>
                     <tr>
                         <td>Row vector</td>
                         <td><code>A = [1 2 3]</code></td>
+                        <td><code>A = [1 2 3]</code></td>
                         <td><code>A = np.array([[1, 2, 3]])</code></td>
                         <td><code>A = [1 2 3]</code></td>
                     </tr>
                     <tr>
                         <td>Column vector</td>
+                        <td><code>A = [1; 2; 3]</code></td>
                         <td><code>A = [1; 2; 3]</code></td>
                         <td><code>A = np.array([[1], [2], [3]])</code></td>
                         <td><code>A = [1 2 3]'  # Transpose of row vector
@@ -546,11 +586,13 @@ A = [1, 2, 3]  # 1-D array (column)</code></td>
                     <tr>
                         <td>1-D array</td>
                         <td><code>Not applicable</code></td>
+                        <td><code>Not applicable</code></td>
                         <td><code>A = np.array([1, 2, 3])</code></td>
                         <td><code>A = [1, 2, 3]</code></td>
                     </tr>
                     <tr>
                         <td>Integers from 1 to n</td>
+                        <td><code>A = 1:n</code></td>
                         <td><code>A = 1:n</code></td>
                         <td><code>A = np.arange(1, n+1)</code></td>
                         <td><code>A = 1:n</code></td>
@@ -558,11 +600,13 @@ A = [1, 2, 3]  # 1-D array (column)</code></td>
                     <tr>
                         <td>Integers j to n, step k</td>
                         <td><code>A = j:k:n</code></td>
+                        <td><code>A = j:k:n</code></td>
                         <td><code>A = np.arange(j, n+1, k)</code></td>
                         <td><code>A = j:k:n</code></td>
                     </tr>
                     <tr>
                         <td>Linearly spaced</td>
+                        <td><code>A = linspace(1, 5, k)</code></td>
                         <td><code>A = linspace(1, 5, k)</code></td>
                         <td><code>A = np.linspace(1, 5, k)</code></td>
                         <td><code>A = range(1, 5, length=k)</code></td>
@@ -577,6 +621,7 @@ A = [1, 2, 3]  # 1-D array (column)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -585,11 +630,13 @@ A = [1, 2, 3]  # 1-D array (column)</code></td>
                     <tr>
                         <td>Create matrix</td>
                         <td><code>A = [1 2; 3 4]</code></td>
+                        <td><code>A = [1 2; 3 4]</code></td>
                         <td><code>A = np.array([[1, 2], [3, 4]])</code></td>
                         <td><code>A = [1 2; 3 4]</code></td>
                     </tr>
                     <tr>
                         <td>Zeros</td>
+                        <td><code>A = zeros(2, 2)</code></td>
                         <td><code>A = zeros(2, 2)</code></td>
                         <td><code>A = np.zeros((2, 2))</code></td>
                         <td><code>A = zeros(2, 2)</code></td>
@@ -597,12 +644,14 @@ A = [1, 2, 3]  # 1-D array (column)</code></td>
                     <tr>
                         <td>Ones</td>
                         <td><code>A = ones(2, 2)</code></td>
+                        <td><code>A = ones(2, 2)</code></td>
                         <td><code>A = np.ones((2, 2))</code></td>
                         <td><code>A = ones(2, 2)</code></td>
                     </tr>
                     <tr>
                         <td>Identity</td>
                         <td><code>A = eye(2)</code></td>
+                        <td><code>A = eye(2,2)</code></td>
                         <td><code>A = np.eye(2)</code></td>
                         <td><code>A = I
 A = Matrix(I, 2, 2)</code></td>
@@ -610,11 +659,13 @@ A = Matrix(I, 2, 2)</code></td>
                     <tr>
                         <td>Diagonal</td>
                         <td><code>A = diag([1 2 3])</code></td>
+                        <td><code>A = diag([1 2 3])</code></td>
                         <td><code>A = np.diag([1, 2, 3])</code></td>
                         <td><code>A = Diagonal([1, 2, 3])</code></td>
                     </tr>
                     <tr>
                         <td>Random uniform</td>
+                        <td><code>A = rand(2, 2)</code></td>
                         <td><code>A = rand(2, 2)</code></td>
                         <td><code>A = np.random.rand(2, 2)</code></td>
                         <td><code>A = rand(2, 2)</code></td>
@@ -622,11 +673,13 @@ A = Matrix(I, 2, 2)</code></td>
                     <tr>
                         <td>Random normal</td>
                         <td><code>A = randn(2, 2)</code></td>
+                        <td><code>A = rand(2, 2, "normal")</code></td>
                         <td><code>A = np.random.randn(2, 2)</code></td>
                         <td><code>A = randn(2, 2)</code></td>
                     </tr>
                     <tr>
                         <td>Sparse</td>
+                        <td><code>A = sparse(B)</code></td>
                         <td><code>A = sparse(B)</code></td>
                         <td><code>from scipy import sparse
 A = sparse.csr_matrix(B)</code></td>
@@ -640,6 +693,7 @@ A[2, 2] = 1</code></td>
                     <tr>
                         <td>Tridiagonal</td>
                         <td><code>A = diag(x, -1) + diag(y, 0) + diag(z, 1)</code></td>
+                        <td><code>A = diag(x,-1) + diag(y,0) + diag(z,1)</code></td>
                         <td><code>from scipy.sparse import diags
 A = diags([x, y, z], [-1, 0, 1])</code></td>
                         <td><code># Example vectors
@@ -658,6 +712,7 @@ Tridiagonal(x, y, z)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -672,6 +727,7 @@ A.'</code></td>
                     </tr>
                     <tr>
                         <td>Complex conjugate transpose</td>
+                        <td><code>A'</code></td>
                         <td><code>A'</code></td>
                         <td><code>A.conj().T</code></td>
                         <td><code>A'
@@ -700,11 +756,13 @@ A = vcat(B, C)  # Function form</code></td>
                     <tr>
                         <td>Reshape (to 5x2)</td>
                         <td><code>A = reshape(A, 5, 2)</code></td>
+                        <td><code>A = matrix(A, 5, 2)</code></td>
                         <td><code>A = A.reshape(5, 2)</code></td>
                         <td><code>A = reshape(A, 5, 2)</code></td>
                     </tr>
                     <tr>
                         <td>Convert matrix to vector</td>
+                        <td><code>A(:)</code></td>
                         <td><code>A(:)</code></td>
                         <td><code>A.flatten()</code></td>
                         <td><code>A[:]
@@ -713,17 +771,20 @@ vec(A)</code></td>
                     <tr>
                         <td>Flip left/right</td>
                         <td><code>fliplr(A)</code></td>
+                        <td><code>flipdim(A,2)</code></td>
                         <td><code>np.fliplr(A)</code></td>
                         <td><code>reverse(A, dims=2)</code></td>
                     </tr>
                     <tr>
                         <td>Flip up/down</td>
                         <td><code>flipud(A)</code></td>
+                        <td><code>flipdim(A,1)</code></td>
                         <td><code>np.flipud(A)</code></td>
                         <td><code>reverse(A, dims=1)</code></td>
                     </tr>
                     <tr>
                         <td>Repeat matrix (3x4 block)</td>
+                        <td><code>repmat(A, 3, 4)</code></td>
                         <td><code>repmat(A, 3, 4)</code></td>
                         <td><code>np.tile(A, (3, 4))</code></td>
                         <td><code>repeat(A, 3, 4)</code></td>
@@ -731,6 +792,7 @@ vec(A)</code></td>
                     <tr>
                         <td>Preallocate similar array</td>
                         <td><code>B = zeros(size(A))</code></td>
+                        <td><code>B = zeros(A)</code></td>
                         <td><code>B = np.empty_like(A)</code></td>
                         <td><code>x = rand(3, 3)
 y = similar(x)
@@ -739,6 +801,7 @@ y = similar(x, 2, 2)</code></td>
                     <tr>
                         <td>Broadcasting functions</td>
                         <td><code>arrayfun(@(x) x^2, A)</code></td>
+                        <td><code>feval(A, #(x)-&gt;(x^2))</code></td>
                         <td><code>A**2  # NumPy broadcasts automatically</code></td>
                         <td><code>f(x) = x^2
 g(x, y) = x + 2 + y^2
@@ -750,17 +813,20 @@ g.(x, y)  # Apply g element-wise</code></td>
                     <tr>
                         <td>Sort each row</td>
                         <td><code>sort(A)</code></td>
+                        <td></td>
                         <td><code>np.sort(A)</code></td>
                         <td><code>sort(A, dims=1)</code></td>
                     </tr>
                     <tr>
                         <td>Sort each column</td>
                         <td><code>sort(A, 2)</code></td>
+                        <td></td>
                         <td><code>np.sort(A, axis=1)</code></td>
                         <td><code>sort(A, dims=2)</code></td>
                     </tr>
                     <tr>
                         <td>Unique values</td>
+                        <td><code>unique(A)</code></td>
                         <td><code>unique(A)</code></td>
                         <td><code>np.unique(A)</code></td>
                         <td><code>unique(A)</code></td>
@@ -775,6 +841,7 @@ g.(x, y)  # Apply g element-wise</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -783,11 +850,13 @@ g.(x, y)  # Apply g element-wise</code></td>
                     <tr>
                         <td>Access element (row i, col j)</td>
                         <td><code>A(i, j)</code></td>
+                        <td><code>A(i, j)</code></td>
                         <td><code>A[i-1, j-1]</code></td>
                         <td><code>A[i, j]</code></td>
                     </tr>
                     <tr>
                         <td>Access row i</td>
+                        <td><code>A(i, :)</code></td>
                         <td><code>A(i, :)</code></td>
                         <td><code>A[i-1, :]</code></td>
                         <td><code>A[i, :]</code></td>
@@ -795,11 +864,13 @@ g.(x, y)  # Apply g element-wise</code></td>
                     <tr>
                         <td>Access column j</td>
                         <td><code>A(:, j)</code></td>
+                        <td><code>A(:, j)</code></td>
                         <td><code>A[:, j-1]</code></td>
                         <td><code>A[:, j]</code></td>
                     </tr>
                     <tr>
                         <td>First k rows</td>
+                        <td><code>A(1:k, :)</code></td>
                         <td><code>A(1:k, :)</code></td>
                         <td><code>A[:k, :]</code></td>
                         <td><code>A[1:k, :]</code></td>
@@ -807,11 +878,13 @@ g.(x, y)  # Apply g element-wise</code></td>
                     <tr>
                         <td>First k columns</td>
                         <td><code>A(:, 1:k)</code></td>
+                        <td><code>A(:, 1:k)</code></td>
                         <td><code>A[:, :k]</code></td>
                         <td><code>A[:, 1:k]</code></td>
                     </tr>
                     <tr>
                         <td>Last k rows</td>
+                        <td><code>A(end-k+1:end, :)</code></td>
                         <td><code>A(end-k+1:end, :)</code></td>
                         <td><code>A[-k:, :]</code></td>
                         <td><code>A[end-k+1:end, :]</code></td>
@@ -819,11 +892,13 @@ g.(x, y)  # Apply g element-wise</code></td>
                     <tr>
                         <td>Select rows [1, 3, 5]</td>
                         <td><code>A([1 3 5], :)</code></td>
+                        <td><code>A([1 3 5], :)</code></td>
                         <td><code>A[[0, 2, 4], :]</code></td>
                         <td><code>A[[1, 3, 5], :]</code></td>
                     </tr>
                     <tr>
                         <td>Remove row 2</td>
+                        <td><code>A(2, :) = []</code></td>
                         <td><code>A(2, :) = []</code></td>
                         <td><code>A = np.delete(A, 1, axis=0)</code></td>
                         <td><code>A = A[setdiff(1:end, 2), :]</code></td>
@@ -831,11 +906,13 @@ g.(x, y)  # Apply g element-wise</code></td>
                     <tr>
                         <td>Diagonal elements</td>
                         <td><code>diag(A)</code></td>
+                        <td><code>diag(A)</code></td>
                         <td><code>np.diag(A)</code></td>
                         <td><code>diag(A)</code></td>
                     </tr>
                     <tr>
                         <td>Get dimensions</td>
+                        <td><code>size(A)</code></td>
                         <td><code>size(A)</code></td>
                         <td><code>A.shape</code></td>
                         <td><code>size(A)
@@ -844,12 +921,14 @@ nrow, ncol = size(A)</code></td>
                     <tr>
                         <td>Number of dimensions</td>
                         <td><code>ndims(A)</code></td>
+                        <td><code>ndims(A)</code></td>
                         <td><code>A.ndim</code></td>
                         <td><code>ndims(A)</code></td>
                     </tr>
                     <tr>
                         <td>Number of elements</td>
                         <td><code>numel(A)</code></td>
+                        <td><code>length(A)</code></td>
                         <td><code>A.size</code></td>
                         <td><code>length(A)</code></td>
                     </tr>
@@ -863,6 +942,7 @@ nrow, ncol = size(A)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -871,6 +951,7 @@ nrow, ncol = size(A)</code></td>
                     <tr>
                         <td>Dot product</td>
                         <td><code>dot(A, B)</code></td>
+                        <td><code>A(:)'*B(:)</code></td>
                         <td><code>np.dot(A, B)
 A @ B</code></td>
                         <td><code>dot(A, B)
@@ -879,6 +960,7 @@ A ⋅ B</code></td>
                     <tr>
                         <td>Matrix multiplication</td>
                         <td><code>A * B</code></td>
+                        <td><code>A * B</code></td>
                         <td><code>A @ B
 np.matmul(A, B)</code></td>
                         <td><code>A * B</code></td>
@@ -886,11 +968,13 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Element-wise multiplication</td>
                         <td><code>A .* B</code></td>
+                        <td><code>A .* B</code></td>
                         <td><code>A * B</code></td>
                         <td><code>A .* B</code></td>
                     </tr>
                     <tr>
                         <td>Element-wise division</td>
+                        <td><code>A ./ B</code></td>
                         <td><code>A ./ B</code></td>
                         <td><code>A / B</code></td>
                         <td><code>A ./ B</code></td>
@@ -898,11 +982,13 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Element-wise power</td>
                         <td><code>A .^ 2</code></td>
+                        <td><code>A .^ 2</code></td>
                         <td><code>A ** 2</code></td>
                         <td><code>A .^ 2</code></td>
                     </tr>
                     <tr>
                         <td>Matrix power</td>
+                        <td><code>A^2</code></td>
                         <td><code>A^2</code></td>
                         <td><code>np.linalg.matrix_power(A, 2)</code></td>
                         <td><code>A^2</code></td>
@@ -910,11 +996,13 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Inverse</td>
                         <td><code>inv(A)</code></td>
+                        <td><code>inv(A)</code></td>
                         <td><code>np.linalg.inv(A)</code></td>
                         <td><code>inv(A)</code></td>
                     </tr>
                     <tr>
                         <td>Determinant</td>
+                        <td><code>det(A)</code></td>
                         <td><code>det(A)</code></td>
                         <td><code>np.linalg.det(A)</code></td>
                         <td><code>det(A)</code></td>
@@ -922,11 +1010,13 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Eigenvalues & vectors</td>
                         <td><code>[V, D] = eig(A)</code></td>
+                        <td></td>
                         <td><code>D, V = np.linalg.eig(A)</code></td>
                         <td><code>D, V = eigen(A)</code></td>
                     </tr>
                     <tr>
                         <td>Singular value decomposition</td>
+                        <td><code>[U, S, V] = svd(A)</code></td>
                         <td><code>[U, S, V] = svd(A)</code></td>
                         <td><code>U, S, V = np.linalg.svd(A)</code></td>
                         <td><code>U, S, V = svd(A)</code></td>
@@ -934,11 +1024,13 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Cholesky decomposition</td>
                         <td><code>chol(A)</code></td>
+                        <td><code>chol(A)</code></td>
                         <td><code>np.linalg.cholesky(A)</code></td>
                         <td><code>cholesky(A)</code></td>
                     </tr>
                     <tr>
                         <td>LU decomposition</td>
+                        <td><code>[L, U, P] = lu(A)</code></td>
                         <td><code>[L, U, P] = lu(A)</code></td>
                         <td><code>P, L, U = scipy.linalg.lu(A)</code></td>
                         <td><code>L, U, p = lu(A)</code></td>
@@ -946,11 +1038,13 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>QR decomposition</td>
                         <td><code>[Q, R] = qr(A)</code></td>
+                        <td><code>[Q, R] = qr(A)</code></td>
                         <td><code>Q, R = np.linalg.qr(A)</code></td>
                         <td><code>Q, R = qr(A)</code></td>
                     </tr>
                     <tr>
                         <td>Rank</td>
+                        <td><code>rank(A)</code></td>
                         <td><code>rank(A)</code></td>
                         <td><code>np.linalg.matrix_rank(A)</code></td>
                         <td><code>rank(A)</code></td>
@@ -958,11 +1052,13 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Trace</td>
                         <td><code>trace(A)</code></td>
+                        <td><code>trace(A)</code></td>
                         <td><code>np.trace(A)</code></td>
                         <td><code>tr(A)</code></td>
                     </tr>
                     <tr>
                         <td>Norm</td>
+                        <td><code>norm(A)</code></td>
                         <td><code>norm(A)</code></td>
                         <td><code>np.linalg.norm(A)</code></td>
                         <td><code>norm(A)</code></td>
@@ -970,17 +1066,20 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Condition number</td>
                         <td><code>cond(A)</code></td>
+                        <td><code>cond(A)</code></td>
                         <td><code>np.linalg.cond(A)</code></td>
                         <td><code>cond(A)</code></td>
                     </tr>
                     <tr>
                         <td>Solve Ax = b</td>
                         <td><code>A \ b</code></td>
+                        <td><code>A \ b</code></td>
                         <td><code>np.linalg.solve(A, b)</code></td>
                         <td><code>A \ b</code></td>
                     </tr>
                     <tr>
                         <td>Least squares</td>
+                        <td><code>A \ b</code></td>
                         <td><code>A \ b</code></td>
                         <td><code>np.linalg.lstsq(A, b)[0]</code></td>
                         <td><code>A \ b</code></td>
@@ -995,6 +1094,7 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1003,17 +1103,20 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Sum of all elements</td>
                         <td><code>sum(A(:))</code></td>
+                        <td><code>sum(A)</code></td>
                         <td><code>np.sum(A)</code></td>
                         <td><code>sum(A)</code></td>
                     </tr>
                     <tr>
                         <td>Sum along columns</td>
                         <td><code>sum(A)</code></td>
+                        <td><code>sum(A,1)</code></td>
                         <td><code>np.sum(A, axis=0)</code></td>
                         <td><code>sum(A, dims=1)</code></td>
                     </tr>
                     <tr>
                         <td>Sum along rows</td>
+                        <td><code>sum(A, 2)</code></td>
                         <td><code>sum(A, 2)</code></td>
                         <td><code>np.sum(A, axis=1)</code></td>
                         <td><code>sum(A, dims=2)</code></td>
@@ -1021,29 +1124,34 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Cumulative sum</td>
                         <td><code>cumsum(A)</code></td>
+                        <td><code>cumsum(A)</code></td>
                         <td><code>np.cumsum(A)</code></td>
                         <td><code>cumsum(A)</code></td>
                     </tr>
                     <tr>
                         <td>Max of all elements</td>
                         <td><code>max(A(:))</code></td>
+                        <td><code>max(A)</code></td>
                         <td><code>np.max(A)</code></td>
                         <td><code>maximum(A)</code></td>
                     </tr>
                     <tr>
                         <td>Max along columns</td>
                         <td><code>max(A)</code></td>
+                        <td><code>max(A,1)</code></td>
                         <td><code>np.max(A, axis=0)</code></td>
                         <td><code>maximum(A, dims=1)</code></td>
                     </tr>
                     <tr>
                         <td>Max along rows</td>
                         <td><code>max(A, [], 2)</code></td>
+                        <td><code>max(A, 2)</code></td>
                         <td><code>np.max(A, axis=1)</code></td>
                         <td><code>maximum(A, dims=2)</code></td>
                     </tr>
                     <tr>
                         <td>Max and index</td>
+                        <td><code>[val, idx] = max(A)</code></td>
                         <td><code>[val, idx] = max(A)</code></td>
                         <td><code>idx = np.argmax(A)
 val = A.flat[idx]</code></td>
@@ -1052,23 +1160,27 @@ val = A.flat[idx]</code></td>
                     <tr>
                         <td>Min of all elements</td>
                         <td><code>min(A(:))</code></td>
+                        <td><code>min(A)</code></td>
                         <td><code>np.min(A)</code></td>
                         <td><code>minimum(A)</code></td>
                     </tr>
                     <tr>
                         <td>Min along columns</td>
                         <td><code>min(A)</code></td>
+                        <td><code>min(A,1)</code></td>
                         <td><code>np.min(A, axis=0)</code></td>
                         <td><code>minimum(A, dims=1)</code></td>
                     </tr>
                     <tr>
                         <td>Min along rows</td>
                         <td><code>min(A, [], 2)</code></td>
+                        <td><code>min(A, 2)</code></td>
                         <td><code>np.min(A, axis=1)</code></td>
                         <td><code>minimum(A, dims=2)</code></td>
                     </tr>
                     <tr>
                         <td>Min and index</td>
+                        <td><code>[val, idx] = min(A)</code></td>
                         <td><code>[val, idx] = min(A)</code></td>
                         <td><code>idx = np.argmin(A)
 val = A.flat[idx]</code></td>
@@ -1077,11 +1189,13 @@ val = A.flat[idx]</code></td>
                     <tr>
                         <td>Mean</td>
                         <td><code>mean(A)</code></td>
+                        <td><code>mean(A)</code></td>
                         <td><code>np.mean(A)</code></td>
                         <td><code>mean(A)</code></td>
                     </tr>
                     <tr>
                         <td>Median</td>
+                        <td><code>median(A)</code></td>
                         <td><code>median(A)</code></td>
                         <td><code>np.median(A)</code></td>
                         <td><code>median(A)</code></td>
@@ -1089,12 +1203,14 @@ val = A.flat[idx]</code></td>
                     <tr>
                         <td>Standard deviation</td>
                         <td><code>std(A)</code></td>
+                        <td><code>stdev(A)</code></td>
                         <td><code>np.std(A)</code></td>
                         <td><code>std(A)</code></td>
                     </tr>
                     <tr>
                         <td>Variance</td>
                         <td><code>var(A)</code></td>
+                        <td><code>variance(A)</code></td>
                         <td><code>np.var(A)</code></td>
                         <td><code>var(A)</code></td>
                     </tr>
@@ -1108,6 +1224,7 @@ val = A.flat[idx]</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1116,6 +1233,7 @@ val = A.flat[idx]</code></td>
                     <tr>
                         <td>Comment</td>
                         <td><code>% This is a comment</code></td>
+                        <td><code>// This is a comment</code></td>
                         <td><code># This is a comment</code></td>
                         <td><code># This is a comment</code></td>
                     </tr>
@@ -1195,6 +1313,7 @@ f(x) = x^2</code></td>
                     <tr>
                         <td>Anonymous function</td>
                         <td><code>f = @(x) x^2</code></td>
+                        <td><code>f = #(x)-&gt;(x^2)</code></td>
                         <td><code>f = lambda x: x**2</code></td>
                         <td><code>f = x -> x^2</code></td>
                     </tr>
@@ -1226,6 +1345,7 @@ print("text")</code></td>
                     <tr>
                         <td>String formatting</td>
                         <td><code>sprintf('x = %d', x)</code></td>
+                        <td><code>sprintf('x = %d', x)</code></td>
                         <td><code>f'x = {x}'
 'x = {}'.format(x)</code></td>
                         <td><code>"x = $x"
@@ -1234,29 +1354,34 @@ print("text")</code></td>
                     <tr>
                         <td>Ternary operator</td>
                         <td><code>y = (x > 0) * 1 + (x <= 0) * (-1)</code></td>
+                        <td><code>y = (x &gt; 0) * 1 + (x &lt;= 0) * (-1)</code></td>
                         <td><code>y = 1 if x > 0 else -1</code></td>
                         <td><code>y = x > 0 ? 1 : -1</code></td>
                     </tr>
                     <tr>
                         <td>List comprehension</td>
                         <td><code>y = arrayfun(@(x) x^2, 1:10)</code></td>
+                        <td><code>y = feval(1:10, #(x)-&gt;(x^2))</code></td>
                         <td><code>y = [x**2 for x in range(1, 11)]</code></td>
                         <td><code>y = [x^2 for x in 1:10]</code></td>
                     </tr>
                     <tr>
                         <td>Map function</td>
                         <td><code>arrayfun(@(x) x^2, A)</code></td>
+                        <td><code>y = feval(A, #(x)-&gt;(x^2))</code></td>
                         <td><code>list(map(lambda x: x**2, A))</code></td>
                         <td><code>map(x -> x^2, A)</code></td>
                     </tr>
                     <tr>
                         <td>Filter function</td>
                         <td><code>A(A > 0)</code></td>
+                        <td><code>A(A &gt; 0)</code></td>
                         <td><code>list(filter(lambda x: x > 0, A))</code></td>
                         <td><code>filter(x -> x > 0, A)</code></td>
                     </tr>
                     <tr>
                         <td>Type checking</td>
+                        <td><code>isa(x, 'double')</code></td>
                         <td><code>isa(x, 'double')</code></td>
                         <td><code>isinstance(x, float)</code></td>
                         <td><code>isa(x, Float64)</code></td>
@@ -1302,6 +1427,7 @@ end</code></td>
                     <tr>
                         <td>In-place modification</td>
                         <td><code>A(:) = B(:)</code></td>
+                        <td><code>A(:) = B(:)</code></td>
                         <td><code>A[:] = B[:]</code></td>
                         <td><code># Convention: ! indicates mutation
 function f!(out, x)
@@ -1324,6 +1450,7 @@ A .+= 1  # Add 1 to all elements</code></td>
                     <tr>
                         <td>Timing code</td>
                         <td><code>tic; % code; toc</code></td>
+                        <td><code>tic; // code; toc</code></td>
                         <td><code>import time
 start = time.time()
 # code
@@ -1344,6 +1471,7 @@ end</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1352,6 +1480,7 @@ end</code></td>
                     <tr>
                         <td>Define ODE</td>
                         <td><code>f = @(t,y) -2*y + sin(t)</code></td>
+                        <td><code>f = #(t,y) -&gt; (-2*y + sin(t))</code></td>
                         <td><code>def f(t, y):
     return -2*y + np.sin(t)</code></td>
                         <td><code>f(u, p, t) = -2*u + sin(t)</code></td>
@@ -1359,6 +1488,7 @@ end</code></td>
                     <tr>
                         <td>Solve ODE</td>
                         <td><code>[t, y] = ode45(f, [0, 10], 1)</code></td>
+                        <td><code>[t, y] = cvode(f, [0, 10], 1)</code></td>
                         <td><code>from scipy.integrate import solve_ivp
 sol = solve_ivp(f, [0, 10], [1])</code></td>
                         <td><code>prob = ODEProblem(f, 1.0, (0.0, 10.0))
@@ -1386,6 +1516,7 @@ sol = solve(prob, saveat=t_save)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1409,6 +1540,7 @@ end</code></td>
                     <tr>
                         <td>Solve system</td>
                         <td><code>[t, y] = ode45(@mysys, [0, 20], [1; 0])</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>sol = solve_ivp(mysys, [0, 20], [1, 0])</code></td>
                         <td><code>u0 = [1.0, 0.0]
 tspan = (0.0, 20.0)
@@ -1418,6 +1550,8 @@ sol = solve(prob)</code></td>
                     <tr>
                         <td>Stiff solver</td>
                         <td><code>[t, y] = ode15s(@mysys, [0, 20], [1; 0])</code></td>
+                        <td><code>[t, y] = cvode(mysys, [0, 20], [1; 0], ...
+               method="BDF")</code></td>
                         <td><code>sol = solve_ivp(mysys, [0, 20], [1, 0],
                 method='BDF')</code></td>
                         <td><code>sol = solve(prob, FBDF())</code></td>
@@ -1431,6 +1565,7 @@ sol = solve(prob)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1491,6 +1626,7 @@ y0 = [1; 0; 0];
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1542,6 +1678,7 @@ sol = solve(prob, IDA())
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1582,6 +1719,7 @@ sol = solve(prob, NewtonRaphson())</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1635,6 +1773,7 @@ sol = solve(prob)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1690,6 +1829,7 @@ sol = solve(prob, Optim.LBFGS())</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1715,6 +1855,7 @@ sol = solve(prob)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1737,6 +1878,7 @@ yi = itp.(xi)</code></td>
                     </tr>
                     <tr>
                         <td>Cubic spline</td>
+                        <td><code>yi = interp1(x, y, xi, 'spline')</code></td>
                         <td><code>yi = interp1(x, y, xi, 'spline')</code></td>
                         <td><code>f = interpolate.interp1d(x, y, kind='cubic')
 yi = f(xi)</code></td>
@@ -1780,6 +1922,7 @@ sol = solve(prob)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1834,6 +1977,7 @@ I = DataInterpolations.integral(itp, first(x), last(x))</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1852,12 +1996,14 @@ freq = fftfreq(length(x), fs)</code></td>
                     <tr>
                         <td>Inverse FFT</td>
                         <td><code>x = ifft(y)</code></td>
+                        <td><code>x = ifft(y)</code></td>
                         <td><code>x = np.fft.ifft(y)</code></td>
                         <td><code>x = ifft(y)</code></td>
                     </tr>
                     <tr>
                         <td>Power spectrum</td>
                         <td><code>[pxx, f] = pwelch(x, [], [], [], fs)</code></td>
+                        <td><code>pxx = pspect(sec_step, sec_leng, wtype, x)</code></td>
                         <td><code>from scipy import signal
 f, pxx = signal.welch(x, fs)</code></td>
                         <td><code>using DSP
@@ -1886,6 +2032,7 @@ y = filtfilt(H, x)</code></td>
                     <tr>
                         <td>Convolution</td>
                         <td><code>y = conv(x, h)</code></td>
+                        <td><code>y = conv(x, h)</code></td>
                         <td><code>y = np.convolve(x, h)</code></td>
                         <td><code>y = conv(x, h)</code></td>
                     </tr>
@@ -1901,6 +2048,7 @@ y = filtfilt(H, x)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1928,6 +2076,7 @@ q = quantile(x, [0.25, 0.75])</code></td>
                     <tr>
                         <td>Correlation</td>
                         <td><code>R = corrcoef(x, y)</code></td>
+                        <td><code>R = correl(x, y)</code></td>
                         <td><code>R = np.corrcoef(x, y)</code></td>
                         <td><code>R = cor(x, y)</code></td>
                     </tr>
@@ -1940,6 +2089,7 @@ q = quantile(x, [0.25, 0.75])</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -1987,6 +2137,7 @@ params = pd.ParameterValues;</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -2052,6 +2203,7 @@ sol = solve(prob)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -2060,6 +2212,7 @@ sol = solve(prob)</code></td>
                     <tr>
                         <td>Define symbols</td>
                         <td><code>syms x y z</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>import sympy as sp
 x, y, z = sp.symbols('x y z')</code></td>
                         <td><code>using Symbolics
@@ -2068,30 +2221,35 @@ x, y, z = sp.symbols('x y z')</code></td>
                     <tr>
                         <td>Create expression</td>
                         <td><code>expr = x^2 + 2*x*y + y^2</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>expr = x**2 + 2*x*y + y**2</code></td>
                         <td><code>expr = x^2 + 2*x*y + y^2</code></td>
                     </tr>
                     <tr>
                         <td>Substitute values</td>
                         <td><code>subs(expr, x, 2)</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>expr.subs(x, 2)</code></td>
                         <td><code>substitute(expr, x => 2)</code></td>
                     </tr>
                     <tr>
                         <td>Simplify</td>
                         <td><code>simplify(expr)</code></td>
+                        <td><code>% Xcos cannot simplify</code></td>
                         <td><code>sp.simplify(expr)</code></td>
                         <td><code>simplify(expr)</code></td>
                     </tr>
                     <tr>
                         <td>Expand</td>
                         <td><code>expand(expr)</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>sp.expand(expr)</code></td>
                         <td><code>expand(expr)</code></td>
                     </tr>
                     <tr>
                         <td>Factor</td>
                         <td><code>factor(expr)</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>sp.factor(expr)</code></td>
                         <td><code>using SymbolicUtils
 SymbolicUtils.simplify(expr)</code></td>
@@ -2099,6 +2257,7 @@ SymbolicUtils.simplify(expr)</code></td>
                     <tr>
                         <td>Generate function (out-of-place)</td>
                         <td><code>matlabFunction(expr, 'Vars', [x, y])</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>f = sp.lambdify([x, y], expr)</code></td>
                         <td><code>f = build_function(expr, [x, y])
 f_expr = eval(f[1])</code></td>
@@ -2106,6 +2265,7 @@ f_expr = eval(f[1])</code></td>
                     <tr>
                         <td>Generate function (in-place)</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code># Not available in SymPy</code></td>
                         <td><code>f = build_function(expr, [x, y])
 f! = eval(f[2])  # mutating version</code></td>
@@ -2113,6 +2273,7 @@ f! = eval(f[2])  # mutating version</code></td>
                     <tr>
                         <td>Symbolic in numerical solver</td>
                         <td><code>% Not compatible with ODE solvers</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code># Not compatible with scipy.integrate</code></td>
                         <td><code># Can use symbolic parameters in ODE solvers
 using DifferentialEquations, Symbolics
@@ -2138,6 +2299,7 @@ sol = solve(prob, Euler(), dt=0.25, adaptive=false)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -2146,6 +2308,7 @@ sol = solve(prob, Euler(), dt=0.25, adaptive=false)</code></td>
                     <tr>
                         <td>Derivative</td>
                         <td><code>diff(expr, x)</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>sp.diff(expr, x)</code></td>
                         <td><code>D = Differential(x)
 expand_derivatives(D(expr))</code></td>
@@ -2153,6 +2316,7 @@ expand_derivatives(D(expr))</code></td>
                     <tr>
                         <td>Partial derivative</td>
                         <td><code>diff(expr, x, 2)</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>sp.diff(expr, x, 2)</code></td>
                         <td><code>D = Differential(x)
 expand_derivatives(D^2(expr))</code></td>
@@ -2160,18 +2324,23 @@ expand_derivatives(D^2(expr))</code></td>
                     <tr>
                         <td>Gradient</td>
                         <td><code>gradient(f, [x, y, z])</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>[sp.diff(f, var) for var in [x, y, z]]</code></td>
                         <td><code>Symbolics.gradient(f, [x, y, z])</code></td>
                     </tr>
                     <tr>
                         <td>Jacobian</td>
                         <td><code>jacobian([f1; f2], [x, y])</code></td>
+                        <td><code>f = #(x) -&gt; ( [x(1)^2; x(1)*x(2)] )
+diffcode_jacobian(f,[1 2])
+                        </code></td>
                         <td><code>sp.Matrix([f1, f2]).jacobian([x, y])</code></td>
                         <td><code>Symbolics.jacobian([f1, f2], [x, y])</code></td>
                     </tr>
                     <tr>
                         <td>Integral (indefinite)</td>
                         <td><code>int(expr, x)</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>sp.integrate(expr, x)</code></td>
                         <td><code>using SymbolicIntegration
 symbolic_integrate(expr, x)</code></td>
@@ -2179,6 +2348,7 @@ symbolic_integrate(expr, x)</code></td>
                     <tr>
                         <td>Integral (definite)</td>
                         <td><code>int(expr, x, a, b)</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>sp.integrate(expr, (x, a, b))</code></td>
                         <td><code>using Integrals, Symbolics
 f = build_function(expr, x)
@@ -2194,6 +2364,7 @@ solve(prob, QuadGKJL())</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -2202,6 +2373,7 @@ solve(prob, QuadGKJL())</code></td>
                     <tr>
                         <td>Solve equation</td>
                         <td><code>solve(x^2 - 4 == 0, x)</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>sp.solve(x**2 - 4, x)</code></td>
                         <td><code>using Symbolics
 symbolic_solve(x^2 - 4, x)</code></td>
@@ -2209,6 +2381,7 @@ symbolic_solve(x^2 - 4, x)</code></td>
                     <tr>
                         <td>Solve system</td>
                         <td><code>solve([x + y == 5, x - y == 1], [x, y])</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>sp.solve([x + y - 5, x - y - 1], [x, y])</code></td>
                         <td><code>using Symbolics
 symbolic_solve([x + y ~ 5, x - y ~ 1], [x, y])</code></td>
@@ -2235,6 +2408,7 @@ symbolic_solve([x + y ~ 5, x - y ~ 1], [x, y])</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -2243,6 +2417,7 @@ symbolic_solve([x + y ~ 5, x - y ~ 1], [x, y])</code></td>
                     <tr>
                         <td>Setup</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>import torch</code></td>
                         <td><code>using ForwardDiff</code></td>
                     </tr>
@@ -2264,6 +2439,9 @@ df = ForwardDiff.derivative(f, 2.0)</code></td>
                     <tr>
                         <td>Gradient (vector → scalar)</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>f = #(x)->(sum(x.^2))
+grad = diffcode_jacobian(f,[1 2])
+                        </code></td>
                         <td><code>from torch.autograd.functional import jvp
 
 def f(x):
@@ -2284,6 +2462,9 @@ grad = ForwardDiff.gradient(f, [1.0, 2.0])</code></td>
                     <tr>
                         <td>Jacobian</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>f = #(x) -&gt; ( [x(1)^2; x(1)*x(2)] )
+diffcode_jacobian(f,[1 2])
+                        </code></td>
                         <td><code>from torch.autograd.functional import jacobian
 
 def f(x):
@@ -2297,6 +2478,9 @@ jac = ForwardDiff.jacobian(f, [1.0, 2.0])</code></td>
                     <tr>
                         <td>Hessian</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>f = #(x) -&gt; (sum(x.^2))
+diffcode_hessian(f,[1 2])
+                        </code></td>
                         <td><code>from torch.autograd.functional import hessian
 
 def f(x):
@@ -2309,6 +2493,12 @@ hess = hessian(f, x)</code></td>
                     <tr>
                         <td>Dual numbers</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>
+x = diffcode_der(2,1)
+y = x^2 + sin(x)
+// value: y.v
+// derivative : y.dv
+</code></td>
                         <td><code># Not exposed</code></td>
                         <td><code>using ForwardDiff
 x = ForwardDiff.Dual(2.0, 1.0)
@@ -2319,6 +2509,7 @@ y = x^2 + sin(x)
                     <tr>
                         <td>Consistency requirements</td>
                         <td><code>% N/A</code></td>
+                        <td><code>// N/A</code></td>
                         <td><code># Must replace ALL NumPy/SciPy calls:
 # np.sin → torch.sin
 # scipy.integrate → not compatible
@@ -2338,6 +2529,7 @@ y = x^2 + sin(x)
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -2346,12 +2538,14 @@ y = x^2 + sin(x)
                     <tr>
                         <td>Setup</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>import torch</code></td>
                         <td><code>using Enzyme</code></td>
                     </tr>
                     <tr>
                         <td>Gradient</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>def f(x):
     return x**2 + torch.sin(x)
 
@@ -2368,6 +2562,7 @@ autodiff(Reverse, f, Active, Duplicated(x, Ref(dx)))
                     <tr>
                         <td>Vector gradient</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>def f(x):
     return torch.sum(x**2)
 
@@ -2384,6 +2579,7 @@ autodiff(Reverse, f, Active, Duplicated(x, dx))
                     <tr>
                         <td>Jacobian-vector product (JVP)</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>from torch.autograd.functional import jvp
 
 def f(x):
@@ -2401,6 +2597,7 @@ y, jvp = autodiff(Forward, f, Duplicated, Duplicated(x, v))
                     <tr>
                         <td>Vector-Jacobian product (VJP)</td>
                         <td><code>% Not available natively</code></td>
+                        <td><code>// Not available natively</code></td>
                         <td><code>def f(x):
     return torch.stack([x[0]**2, x[0]*x[1], x[1]**2])
 
@@ -2425,6 +2622,7 @@ autodiff(Reverse, f!, Const,
                     <tr>
                         <td>Consistency requirements</td>
                         <td><code>% N/A</code></td>
+                        <td><code>// N/A</code></td>
                         <td><code># Must replace ALL NumPy/SciPy calls:
 # np.exp → torch.exp
 # scipy functions → not compatible
@@ -2458,6 +2656,7 @@ autodiff(Reverse, f!, Const,
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -2466,6 +2665,7 @@ autodiff(Reverse, f!, Const,
                     <tr>
                         <td>Define ODE system (Cartesian pendulum)</td>
                         <td><code>% Use Simulink or write function</code></td>
+                        <td><code>// Use Xcos or write function</code></td>
                         <td><code>import casadi as ca
 
 x = ca.SX.sym('x')
@@ -2496,6 +2696,7 @@ eqs = [D(x) ~ vx,
                     <tr>
                         <td>Simplify system</td>
                         <td><code>% Manual simplification</code></td>
+                        <td><code>// Manual simplification</code></td>
                         <td><code># CasADi cannot do acausal simplification</code></td>
                         <td><code>pendulum = complete(pendulum)
 pendulum_simplified = mtkcompile(pendulum)</code></td>
@@ -2503,6 +2704,7 @@ pendulum_simplified = mtkcompile(pendulum)</code></td>
                     <tr>
                         <td>Transient simulation</td>
                         <td><code>% Create function handle and solve</code></td>
+                        <td><code>// Create function handle and solve</code></td>
                         <td><code># Note: CasADi cannot directly solve
 # this DAE model - would need integrator
 # setup with algebraic constraints,
@@ -2518,6 +2720,7 @@ sol = solve(prob)</code></td>
                     <tr>
                         <td>Steady state solutions</td>
                         <td><code>% Use fsolve or symbolic solve</code></td>
+                        <td><code>// Use fsolve or symbolic solve</code></td>
                         <td><code># CasADi has its own rootfinder
 import casadi as ca
 # Create rootfinder for algebraic equations
@@ -2530,6 +2733,7 @@ ss_sol = solve(ss_prob)</code></td>
                     <tr>
                         <td>Generate LaTeX</td>
                         <td><code>% Not available for Simulink models</code></td>
+                        <td><code>// Not available for Xcos models</code></td>
                         <td><code># Not available in CasADi</code></td>
                         <td><code>using Latexify
 latexify(pendulum)</code></td>
@@ -2544,6 +2748,7 @@ latexify(pendulum)</code></td>
                     <tr>
                         <th>Description</th>
                         <th>MATLAB</th>
+                        <th>Scilab</th>
                         <th>Python</th>
                         <th>Julia</th>
                     </tr>
@@ -2552,6 +2757,7 @@ latexify(pendulum)</code></td>
                     <tr>
                         <td>Create component</td>
                         <td><code>% Use Simulink blocks</code></td>
+                        <td><code>% Use Xcos blocks</code></td>
                         <td><code># No direct equivalent
 # Consider PyMola or OpenModelica</code></td>
                         <td><code>function Mass(; name, m = 1.0,
@@ -2572,6 +2778,7 @@ end
                     <tr>
                         <td>Connect systems</td>
                         <td><code>% Simulink connections</code></td>
+                        <td><code>% Xcos connections</code></td>
                         <td><code># Manual composition</code></td>
                         <td><code>@named spring = Spring(k = 100)
 @named damper = Damper(c = 10)
@@ -2589,6 +2796,7 @@ model = complete(model)</code></td>
                     <tr>
                         <td>Simplify</td>
                         <td><code>% Simulink cannot simplify</code></td>
+                        <td><code>% Xcos cannot simplify</code></td>
                         <td><code># Manual</code></td>
                         <td><code>model_simplified = mtkcompile(model)</code></td>
                     </tr>
@@ -2628,6 +2836,21 @@ model = complete(model)</code></td>
                     document.querySelector('.sidebar').classList.remove('active');
                 }
             });
+        });
+    </script>
+
+    <script>
+        document.getElementById('matlab').addEventListener('click', function() {
+            document.body.classList.toggle('hidematlab');
+        });
+        document.getElementById('scilab').addEventListener('click', function() {
+            document.body.classList.toggle('hidescilab');
+        });
+        document.getElementById('python').addEventListener('click', function() {
+            document.body.classList.toggle('hidepython');
+        });
+        document.getElementById('julia').addEventListener('click', function() {
+            document.body.classList.toggle('hidejulia');
         });
     </script>
 </body>
