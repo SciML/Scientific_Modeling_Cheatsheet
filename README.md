@@ -8,6 +8,7 @@ A comprehensive quick reference guide comparing MATLAB, Python, and Julia for sc
 
 This cheatsheet provides side-by-side comparisons of common scientific computing operations across three major platforms:
 - **MATLAB** - The traditional choice for engineering and scientific computing
+- **Scilab** - Open source software for numerical computation sharing many features and language idioms with MATLAB
 - **Python** - Using NumPy, SciPy, PyTorch, and SymPy for scientific computing
 - **Julia** - Modern high-performance scientific computing with unified ecosystem
 
@@ -89,3 +90,4 @@ Contributions are welcome! Please feel free to submit pull requests with:
 - [SciPy Documentation](https://docs.scipy.org/doc/scipy/)
 - [PyTorch Documentation](https://pytorch.org/docs/)
 - [MATLAB Documentation](https://www.mathworks.com/help/matlab/)
+- [Scilab Documentation](https://heplp.scilab.org/)
