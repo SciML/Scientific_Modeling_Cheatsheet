@@ -1868,10 +1868,20 @@ pxx = welch_pgram(x, fs=fs)</code></td>
                         <td><code>[b, a] = butter(4, 0.2);
 y = filter(b, a, x)</code></td>
                         <td><code>b, a = signal.butter(4, 0.2)
-y = signal.filtfilt(b, a, x)</code></td>
+y = signal.lfilter(b, a, x)</code></td>
                         <td><code>using DSP
 H = Butterworth(4, 0.2)
 y = filt(H, x)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Filter (forward-backward, zero-phase)</td>
+                        <td><code>[b, a] = butter(4, 0.2);
+y = filtfilt(b, a, x)</code></td>
+                        <td><code>b, a = signal.butter(4, 0.2)
+y = signal.filtfilt(b, a, x)</code></td>
+                        <td><code>using DSP
+H = Butterworth(4, 0.2)
+y = filtfilt(H, x)</code></td>
                     </tr>
                     <tr>
                         <td>Convolution</td>
@@ -1881,6 +1891,16 @@ y = filt(H, x)</code></td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="note" style="margin-bottom: 20px;">
+                <p><strong>💡 Numerical Stability Note:</strong> For better numerical stability, consider using second-order sections (SOS) form instead of transfer function (b,a) form:</p>
+                <ul style="margin: 5px 0; padding-left: 20px;">
+                    <li><strong>MATLAB:</strong> <code>[sos, g] = butter(4, 0.2); y = sosfilt(sos, x)</code></li>
+                    <li><strong>Python:</strong> <code>sos = signal.butter(4, 0.2, output='sos'); y = signal.sosfilt(sos, x)</code></li>
+                    <li><strong>Julia:</strong> Built-in filters like <code>Butterworth</code> use stable implementations automatically</li>
+                </ul>
+                <p style="margin-top: 10px;">SOS form is particularly important for high-order filters to avoid numerical precision issues.</p>
+            </div>
 
             <!-- Statistics -->
             <h2 id="statistics">Statistics and Distributions</h2>
