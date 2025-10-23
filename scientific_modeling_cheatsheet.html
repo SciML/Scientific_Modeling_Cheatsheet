@@ -1868,10 +1868,20 @@ pxx = welch_pgram(x, fs=fs)</code></td>
                         <td><code>[b, a] = butter(4, 0.2);
 y = filter(b, a, x)</code></td>
                         <td><code>b, a = signal.butter(4, 0.2)
-y = signal.filtfilt(b, a, x)</code></td>
+y = signal.lfilter(b, a, x)</code></td>
                         <td><code>using DSP
 H = Butterworth(4, 0.2)
 y = filt(H, x)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Filter (forward-backward, zero-phase)</td>
+                        <td><code>[b, a] = butter(4, 0.2);
+y = filtfilt(b, a, x)</code></td>
+                        <td><code>b, a = signal.butter(4, 0.2)
+y = signal.filtfilt(b, a, x)</code></td>
+                        <td><code>using DSP
+H = Butterworth(4, 0.2)
+y = filtfilt(H, x)</code></td>
                     </tr>
                     <tr>
                         <td>Convolution</td>
