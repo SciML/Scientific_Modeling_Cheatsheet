@@ -1864,7 +1864,10 @@ sol = solve(prob, Optim.LBFGS())</code></td>
                         <td>Box constraints</td>
                         <td><code>lb = [0; 0]; ub = [1; 1];
 x = fmincon(f, x0, [], [], [], [], lb, ub)</code></td>
-                        <td></td>
+                        <td><code>atomsInstall fmincon
+atomsLoad fmincon
+lb = [0; 0]; ub = [1; 1];
+x = fmincon(f, x0, [], [], [], [], lb, ub)</code></td>
                         <td><code>bounds = [(0, 1), (0, 1)]
 res = minimize(f, x0, bounds=bounds)</code></td>
                         <td><code>prob = OptimizationProblem(f, [0.5, 0.5],
@@ -2458,7 +2461,8 @@ symbolic_solve([x + y ~ 5, x - y ~ 1], [x, y])</code></td>
                     <tr>
                         <td>Setup</td>
                         <td><code>% Not available natively</code></td>
-                        <td><code>// Not available natively</code></td>
+                        <td><code>atomsInstall diffcode
+atomsLoad diffcode</code></td>
                         <td><code>import torch</code></td>
                         <td><code>using ForwardDiff</code></td>
                     </tr>
@@ -2466,7 +2470,10 @@ symbolic_solve([x + y ~ 5, x - y ~ 1], [x, y])</code></td>
                         <td>Gradient (scalar → scalar)</td>
                         <td><code>% Not available natively
 % Use symbolic or finite differences</code></td>
-                        <td></td>
+                        <td><code>
+f = #(x) -> (x^2+sin(x))
+df = f(diffcode_der(2,1)).dv
+</code></td>
                         <td><code>from torch.autograd.functional import jvp
 
 def f(x):
