@@ -816,14 +816,14 @@ g.(x, y)  # Apply g element-wise</code></td>
                     <tr>
                         <td>Sort each row</td>
                         <td><code>sort(A)</code></td>
-                        <td></td>
+                        <td><code>gsort(A, 1)</code></td>
                         <td><code>np.sort(A)</code></td>
                         <td><code>sort(A, dims=1)</code></td>
                     </tr>
                     <tr>
                         <td>Sort each column</td>
                         <td><code>sort(A, 2)</code></td>
-                        <td></td>
+                        <td><code>gsort(A, 2)</code><</td>
                         <td><code>np.sort(A, axis=1)</code></td>
                         <td><code>sort(A, dims=2)</code></td>
                     </tr>
@@ -1013,7 +1013,7 @@ np.matmul(A, B)</code></td>
                     <tr>
                         <td>Eigenvalues & vectors</td>
                         <td><code>[V, D] = eig(A)</code></td>
-                        <td></td>
+                        <td><code>[V, D] = spec(A)</code></td>
                         <td><code>D, V = np.linalg.eig(A)</code></td>
                         <td><code>D, V = eigen(A)</code></td>
                     </tr>
