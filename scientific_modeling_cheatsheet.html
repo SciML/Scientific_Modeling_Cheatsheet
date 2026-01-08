@@ -2804,7 +2804,8 @@ autodiff(Reverse, f!, Const,
                 <tbody>
                     <tr>
                         <td>Define ODE system (Cartesian pendulum)</td>
-                        <td><code>% Use Simulink or write function</code></td>
+                        <td><code>% Use Simscape (acausal) or
+% Simulink (causal) blocks</code></td>
                         <td><code>// Use Xcos or write function</code></td>
                         <td><code>import casadi as ca
 
@@ -2835,7 +2836,8 @@ eqs = [D(x) ~ vx,
                     </tr>
                     <tr>
                         <td>Simplify system</td>
-                        <td><code>% Manual simplification</code></td>
+                        <td><code>% Simscape auto-simplifies;
+% Manual for Simulink</code></td>
                         <td><code>// Manual simplification</code></td>
                         <td><code># CasADi cannot do acausal simplification</code></td>
                         <td><code>pendulum = complete(pendulum)
@@ -2843,7 +2845,8 @@ pendulum_simplified = mtkcompile(pendulum)</code></td>
                     </tr>
                     <tr>
                         <td>Transient simulation</td>
-                        <td><code>% Create function handle and solve</code></td>
+                        <td><code>% Simscape: Run Simulink model
+% sim('model_name')</code></td>
                         <td><code>// Create function handle and solve</code></td>
                         <td><code># Note: CasADi cannot directly solve
 # this DAE model - would need integrator
@@ -2872,7 +2875,7 @@ ss_sol = solve(ss_prob)</code></td>
                     </tr>
                     <tr>
                         <td>Generate LaTeX</td>
-                        <td><code>% Not available for Simulink models</code></td>
+                        <td><code>% Not available for Simscape/Simulink</code></td>
                         <td><code>// Not available for Xcos models</code></td>
                         <td><code># Not available in CasADi</code></td>
                         <td><code>using Latexify
@@ -2896,8 +2899,30 @@ latexify(pendulum)</code></td>
                 <tbody>
                     <tr>
                         <td>Create component</td>
-                        <td><code>% Use Simulink blocks</code></td>
-                        <td><code>% Use Xcos blocks</code></td>
+                        <td><code>% Simscape component (spring.ssc)
+component spring
+  nodes
+    r = foundation.mechanical.rotational.rotational;
+    c = foundation.mechanical.rotational.rotational;
+  end
+  parameters
+    k = { 10, 'N*m/rad' };
+  end
+  variables
+    theta = { 0, 'rad' };
+    t = { 0, 'N*m' };
+    w = { 0, 'rad/s' };
+  end
+  branches
+    t : r.t -> c.t;
+  end
+  equations
+    w == r.w - c.w;
+    t == k * theta;
+    w == der(theta);
+  end
+end</code></td>
+                        <td><code>// Use Xcos blocks</code></td>
                         <td><code># No direct equivalent
 # Consider PyMola or OpenModelica</code></td>
                         <td><code>function Mass(; name, m = 1.0,
@@ -2917,8 +2942,11 @@ end
                     </tr>
                     <tr>
                         <td>Connect systems</td>
-                        <td><code>% Simulink connections</code></td>
-                        <td><code>% Xcos connections</code></td>
+                        <td><code>% Simscape uses graphical connections
+% in Simulink between component ports
+% Physical connections allow bidirectional
+% energy flow between components</code></td>
+                        <td><code>// Xcos connections</code></td>
                         <td><code># Manual composition</code></td>
                         <td><code>@named spring = Spring(k = 100)
 @named damper = Damper(c = 10)
@@ -2935,8 +2963,9 @@ model = complete(model)</code></td>
                     </tr>
                     <tr>
                         <td>Simplify</td>
-                        <td><code>% Simulink cannot simplify</code></td>
-                        <td><code>% Xcos cannot simplify</code></td>
+                        <td><code>% Simscape auto-simplifies during
+% model compilation</code></td>
+                        <td><code>// Xcos cannot simplify</code></td>
                         <td><code># Manual</code></td>
                         <td><code>model_simplified = mtkcompile(model)</code></td>
                     </tr>
